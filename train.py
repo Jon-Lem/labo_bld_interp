@@ -3,6 +3,7 @@ from pathlib import Path
 import sys
 
 import torch
+#torch.cuda.empty_cache()
 from torch import nn
 from torch.optim import Optimizer, SGD
 from torch.utils.data import DataLoader
@@ -182,7 +183,7 @@ if __name__ == '__main__':
     # Data path
     parser.add_argument(
         '--data_path',
-        default='data/PokemonGen1',
+        default='data/Simpsons',
         help='Path to the dataset',
     )
 
