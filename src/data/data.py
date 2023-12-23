@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import DataLoader
 from torchvision.transforms import v2
 
-from .pokemon_dataset import PokemonDataset
+from .simpsons_dataset import SimpsonsDataset
 
 
 def get_data_loaders(
@@ -21,23 +21,24 @@ def get_data_loaders(
     # Create transforms
     train_tfms = v2.Compose([
         v2.ToImage(),
-        v2.RandomHorizontalFlip(),
-        v2.RandomResizedCrop(size, antialias=True),
-        v2.ToDtype(torch.float32, scale=True),
-        v2.Normalize(mean=norm_mean, std=norm_std),
+	v2.RandomHorizontalFlip(),
+	v2.RandomRotation(30),
+	v2.RandomResizedCrop(size, antialias=True),
+	v2.ToDtype(torch.float32, scale=True),
+	v2.Normalize(mean=norm_mean, std=norm_std),
     ])
     val_tfms = v2.Compose([
         v2.ToImage(),
-        v2.Resize(size, antialias=True),
-        v2.CenterCrop(size),
-        v2.ToDtype(torch.float32, scale=True),
-        v2.Normalize(mean=norm_mean, std=norm_std),
+	v2.Resize(size, antialias=True),
+	v2.CenterCrop(size),
+	v2.ToDtype(torch.float32, scale=True),
+	v2.Normalize(mean=norm_mean, std=norm_std),
     ])
 
     # Create datasets
-    ds_train = PokemonDataset(data_path, 'train',
+    ds_train = SimpsonsDataset(data_path, 'train',
                               transform=train_tfms)
-    ds_val = PokemonDataset(data_path, 'val',
+    ds_val = SimpsonsDataset(data_path, 'val',
                             transform=val_tfms)
 
     # Create data loaders
