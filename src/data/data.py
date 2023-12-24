@@ -24,6 +24,8 @@ def get_data_loaders(
 	v2.RandomHorizontalFlip(),
 	v2.RandomRotation(30),
 	v2.RandomResizedCrop(size, antialias=True),
+	#Data Aug
+#    v2.ColorJitter(brightness=0.5, saturation=0.7),
 	v2.ToDtype(torch.float32, scale=True),
 	v2.Normalize(mean=norm_mean, std=norm_std),
     ])
